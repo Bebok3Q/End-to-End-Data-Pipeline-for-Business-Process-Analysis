@@ -6,6 +6,8 @@ from pm4py.objects.log.obj import EventLog
 from pm4py.objects.log.util import dataframe_utils
 from pm4py.algo.discovery.alpha import algorithm as alpha_miner
 from pm4py.visualization.petri_net import visualizer as pn_visualizer
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 
@@ -44,8 +46,34 @@ def process_mining_analysis():
     # gviz = pn_visualizer.apply(net, initial_marking, final_marking)
     # pn_visualizer.view(gviz) 
 
-    bpmn_model = pm4py.discover_bpmn_inductive(event_log)
-    pm4py.view_bpmn(bpmn_model)
+    # bpmn_model = pm4py.discover_bpmn_inductive(event_log)
+    # pm4py.view_bpmn(bpmn_model)
+
+    #######################################
+    # ANALYSIS
+    #######################################
+    # Count of sales per customer type
+    sns.countplot(data=df, x='customer_type', palette='Blues')
+    plt.title('Sales Count by Customer Type')
+    plt.xlabel('Customer Type')
+    plt.ylabel('Count')
+    plt.show()
+
+    # Total revenue by customer type
+    df.groupby('customer_type')['total_amount'].sum().plot(kind='bar', color='lightgreen')
+    plt.title('Total Revenue by Customer Type')
+    plt.xlabel('Customer Type')
+    plt.ylabel('Total Revenue')
+    plt.show()
+
+    # OVERALL REVENUE BY PAYMENT METHOD
+    # Total revenue by payment method
+    sns.barplot(data=df, x='payment_method', y='total_amount', palette='viridis')
+    plt.title('Total Revenue by Payment Method')
+    plt.xlabel('Payment Method')
+    plt.ylabel('Total Revenue')
+    plt.show()
+
 
 
 if __name__ == "__main__":
