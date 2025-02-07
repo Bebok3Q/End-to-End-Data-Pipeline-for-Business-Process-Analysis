@@ -113,10 +113,3 @@ End-to-End-Data-Pipeline-for-Business-Process-Analysis/
    python src/erp/summary.py
    ```
 
->>>>>>> c0a301f (Finalized reporting, ERP integration, and documentation)
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
